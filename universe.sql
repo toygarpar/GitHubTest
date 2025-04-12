@@ -44,6 +44,29 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: formation; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.formation (
+    formation_id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    formation_type character varying(50) NOT NULL,
+    formation_description text,
+    distance_from_earth numeric(15,2),
+    age_in_millions_of_years integer NOT NULL,
+    is_elliptical boolean,
+    has_life boolean,
+    brightness integer,
+    galaxy_id bigint,
+    star_id bigint,
+    planet_id bigint,
+    moon_id bigint
+);
+
+
+ALTER TABLE public.formation OWNER TO freecodecamp;
+
+--
 -- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -163,28 +186,6 @@ ALTER SEQUENCE public.planet_planet_id_seq OWNED BY public.planet.planet_id;
 
 
 --
--- Name: solar_formation; Type: TABLE; Schema: public; Owner: freecodecamp
---
-
-CREATE TABLE public.solar_formation (
-    formation_id integer NOT NULL,
-    formation_type character varying(50) NOT NULL,
-    formation_description text,
-    distance_from_earth numeric(15,2),
-    age_in_millions_of_years integer NOT NULL,
-    is_elliptical boolean,
-    has_life boolean,
-    brightness integer,
-    galaxy_id bigint,
-    star_id bigint,
-    planet_id bigint,
-    moon_id bigint
-);
-
-
-ALTER TABLE public.solar_formation OWNER TO freecodecamp;
-
---
 -- Name: star; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -250,6 +251,32 @@ ALTER TABLE ONLY public.planet ALTER COLUMN planet_id SET DEFAULT nextval('publi
 --
 
 ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.star_star_id_seq'::regclass);
+
+
+--
+-- Data for Name: formation; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.formation VALUES (1, 'Solar System', 'Star System', 'Solar system with one star', 0.00, 4600, false, true, 5, 1, 1, 1, 1);
+INSERT INTO public.formation VALUES (2, 'Alpha Centauri', 'Binary Star', 'System with two stars orbiting each other', 4.37, 6000, false, false, 7, 1, 2, NULL, NULL);
+INSERT INTO public.formation VALUES (3, 'Helix Nebula', 'Planetary Nebula', 'Remnant of a dying star', 2500.00, 10000, true, false, 8, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (4, 'Pleiades', 'Open Cluster', 'Group of young stars', 1500.00, 100, false, false, 6, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (5, 'Omega Centauri', 'Globular Cluster', 'Dense group of old stars', 25000.00, 12000, true, false, 7, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (6, 'Virgo Supercluster', 'Galaxy Filament', 'Large-scale structure of galaxies', 500.00, 13000, false, false, 9, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (7, 'Sagittarius A*', 'Black Hole', 'Supermassive black hole at galactic center', 27000.00, 13000, true, false, 10, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (8, 'Orion Nebula', 'Nebula', 'Cloud of gas and dust', 1300.00, 5000, false, false, 6, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (9, 'Crab Nebula', 'Supernova Remnant', 'Explosion aftermath', 10000.00, 1000, true, false, 8, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (10, 'Asteroid Belt', 'Asteroid Belt', 'Region of rocky debris', 0.00, 4500, false, false, 4, 1, 1, NULL, NULL);
+INSERT INTO public.formation VALUES (11, 'Halley''s Comet', 'Comet', 'Icy body in solar system', 0.00, 4500, false, false, 3, 1, 1, NULL, NULL);
+INSERT INTO public.formation VALUES (12, 'Pluto', 'Dwarf Planet', 'Small planetary body', 0.00, 4500, false, false, 4, 1, 8, NULL, NULL);
+INSERT INTO public.formation VALUES (13, 'Kepler-22 System', 'Exoplanet System', 'System with multiple exoplanets', 600.00, 4000, false, false, 5, 1, 9, NULL, NULL);
+INSERT INTO public.formation VALUES (14, 'Earth-Moon', 'Binary Planet', 'Two planets orbiting each other', 0.00, 4500, false, false, 4, 1, 2, NULL, NULL);
+INSERT INTO public.formation VALUES (15, 'Saturn Rings', 'Ring System', 'Planetary rings', 0.00, 4500, false, false, 5, 1, 3, NULL, NULL);
+INSERT INTO public.formation VALUES (16, 'Jupiter Trojans', 'Trojan Asteroids', 'Asteroids sharing orbit with planet', 0.00, 4500, false, false, 4, 1, 1, NULL, NULL);
+INSERT INTO public.formation VALUES (17, 'Kuiper Belt', 'Kuiper Belt', 'Region of icy bodies', 0.00, 4500, false, false, 4, 1, 8, NULL, NULL);
+INSERT INTO public.formation VALUES (18, 'Oort Cloud', 'Oort Cloud', 'Spherical shell of icy objects', 0.00, 4500, true, false, 3, 1, 8, NULL, NULL);
+INSERT INTO public.formation VALUES (19, 'Interstellar Object', 'Interstellar Object', 'Object from outside solar system', 0.00, 4500, false, false, 4, 1, NULL, NULL, NULL);
+INSERT INTO public.formation VALUES (20, 'Hyades Cluster', 'Star Cluster', 'Group of stars bound by gravity', 0.00, 4500, false, false, 6, 1, NULL, NULL, NULL);
 
 
 --
@@ -328,32 +355,6 @@ INSERT INTO public.planet VALUES (17, 'PSR B1257+12 b', false, true, 5000, 2300.
 INSERT INTO public.planet VALUES (18, 'CoRoT-7b', false, true, 1500, 480.00, 4, 'Super-Earth', 10);
 INSERT INTO public.planet VALUES (19, 'OGLE-2005-BLG-390Lb', false, true, 9000, 21000.00, 3, 'Super-Earth', 11);
 INSERT INTO public.planet VALUES (20, 'GJ 1214 b', false, true, 6000, 40.00, 5, 'Mini-Neptune', 12);
-
-
---
--- Data for Name: solar_formation; Type: TABLE DATA; Schema: public; Owner: freecodecamp
---
-
-INSERT INTO public.solar_formation VALUES (1, 'Star System', 'Solar system with one star', 0.00, 4600, false, true, 5, 1, 1, 1, 1);
-INSERT INTO public.solar_formation VALUES (2, 'Binary Star', 'System with two stars orbiting each other', 4.37, 6000, false, false, 7, 1, 2, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (3, 'Planetary Nebula', 'Remnant of a dying star', 2500.00, 10000, true, false, 8, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (4, 'Open Cluster', 'Group of young stars', 1500.00, 100, false, false, 6, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (5, 'Globular Cluster', 'Dense group of old stars', 25000.00, 12000, true, false, 7, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (6, 'Galaxy Filament', 'Large-scale structure of galaxies', 500.00, 13000, false, false, 9, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (7, 'Black Hole', 'Supermassive black hole at galactic center', 27000.00, 13000, true, false, 10, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (8, 'Nebula', 'Cloud of gas and dust', 1300.00, 5000, false, false, 6, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (9, 'Supernova Remnant', 'Explosion aftermath', 10000.00, 1000, true, false, 8, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (10, 'Asteroid Belt', 'Region of rocky debris', 0.00, 4500, false, false, 4, 1, 1, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (11, 'Comet', 'Icy body in solar system', 0.00, 4500, false, false, 3, 1, 1, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (12, 'Dwarf Planet', 'Small planetary body', 0.00, 4500, false, false, 4, 1, 8, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (13, 'Exoplanet System', 'System with multiple exoplanets', 600.00, 4000, false, false, 5, 1, 9, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (14, 'Binary Planet', 'Two planets orbiting each other', 0.00, 4500, false, false, 4, 1, 2, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (15, 'Ring System', 'Planetary rings', 0.00, 4500, false, false, 5, 1, 3, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (16, 'Trojan Asteroids', 'Asteroids sharing orbit with planet', 0.00, 4500, false, false, 4, 1, 1, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (17, 'Kuiper Belt', 'Region of icy bodies', 0.00, 4500, false, false, 4, 1, 8, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (18, 'Oort Cloud', 'Spherical shell of icy objects', 0.00, 4500, true, false, 3, 1, 8, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (19, 'Interstellar Object', 'Object from outside solar system', 0.00, 4500, false, false, 4, 1, NULL, NULL, NULL);
-INSERT INTO public.solar_formation VALUES (20, 'Star Cluster', 'Group of stars bound by gravity', 0.00, 4500, false, false, 6, 1, NULL, NULL, NULL);
 
 
 --
@@ -459,18 +460,26 @@ ALTER TABLE ONLY public.planet
 
 
 --
--- Name: solar_formation solar_formation_formation_type_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_formation_type_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_formation_type_key UNIQUE (formation_type);
 
 
 --
--- Name: solar_formation solar_formation_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
+    ADD CONSTRAINT solar_formation_name_key UNIQUE (name);
+
+
+--
+-- Name: formation solar_formation_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_pkey PRIMARY KEY (formation_id);
 
 
@@ -507,34 +516,34 @@ ALTER TABLE ONLY public.planet
 
 
 --
--- Name: solar_formation solar_formation_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
 
 
 --
--- Name: solar_formation solar_formation_moon_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_moon_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_moon_id_fkey FOREIGN KEY (moon_id) REFERENCES public.moon(moon_id);
 
 
 --
--- Name: solar_formation solar_formation_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_planet_id_fkey FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
 
 
 --
--- Name: solar_formation solar_formation_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: formation solar_formation_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.solar_formation
+ALTER TABLE ONLY public.formation
     ADD CONSTRAINT solar_formation_star_id_fkey FOREIGN KEY (star_id) REFERENCES public.star(star_id);
 
 
